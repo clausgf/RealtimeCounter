@@ -1,0 +1,32 @@
+#######################################
+# Syntax Coloring Map For Test
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+attachOverflowInterrupt	KEYWORD2
+detachOverflowInterrupt KEYWORD2
+attachCompareMatchInterrupt KEYWORD2
+detachCompareMatchInterrupt KEYWORD2
+standbyModeTicks KEYWORD2
+standbyModeMs KEYWORD2
+getTicks KEYWORD2
+msToTicks KEYWORD2
+sToTicks KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+DELTA_TICKS_MIN LITERAL1
+TICKS_PER_S LITERAL1
