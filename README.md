@@ -1,4 +1,4 @@
-# Rtc
+# RealtimeCounter (Rtc)
 
 Arduino support for the SAMD RTC peripheral in 32 bit counter mode Rtc library for Atmel/Microchip SAMD based Arduinos' RTC peripherals.
 
