@@ -22,7 +22,7 @@
   SOFTWARE.
 */
 
-#include "Rtc.h"
+#include "RtCounter.h"
 
 
 #ifndef ARDUINO_ARCH_SAMD
@@ -31,24 +31,24 @@
 
 // **************************************************************************
 
-class Rtc Rtc;
+class RtCounter RtCounter;
 
-voidFuncPtr Rtc::_OverflowCallback = NULL;
-voidFuncPtr Rtc::_CompareMatchCallback = NULL;
+voidFuncPtr RtCounter::_OverflowCallback = NULL;
+voidFuncPtr RtCounter::_CompareMatchCallback = NULL;
 
-const uint32_t Rtc::DELTA_TICKS_MIN;
-const uint32_t Rtc::TICKS_PER_S;
+const uint32_t RtCounter::DELTA_TICKS_MIN;
+const uint32_t RtCounter::TICKS_PER_S;
 
 // **************************************************************************
 
-Rtc::Rtc()
+RtCounter::RtCounter()
 {
   _enabled = false;
 }
 
 // **************************************************************************
 
-bool Rtc::begin()
+bool RtCounter::begin()
 {
   // do not initialized the RTC class/peripheral twice
   if (_enabled)
@@ -101,7 +101,7 @@ bool Rtc::begin()
 
 // **************************************************************************
 
-void Rtc::end()
+void RtCounter::end()
 {
   // disable interrupts
   detachCompareMatchInterrupt();
@@ -140,9 +140,9 @@ void RTC_Handler(void)
   // handle overflow interrupt
   if (RTC->MODE0.INTFLAG.bit.OVF)
   {
-    if (Rtc::_OverflowCallback != NULL)
+    if (RtCounter::_OverflowCallback != NULL)
     {
-      Rtc::_OverflowCallback();
+      RtCounter::_OverflowCallback();
     }
     RTC->MODE0.INTFLAG.reg = RTC_MODE0_INTFLAG_OVF;
   }
@@ -150,9 +150,9 @@ void RTC_Handler(void)
   // handle compare match interrupt
   if (RTC->MODE0.INTFLAG.bit.CMP0)
   {
-    if (Rtc::_CompareMatchCallback != NULL)
+    if (RtCounter::_CompareMatchCallback != NULL)
     {
-      Rtc::_CompareMatchCallback();
+      RtCounter::_CompareMatchCallback();
     }
     RTC->MODE0.INTFLAG.reg = RTC_MODE0_INTFLAG_CMP0;
   }
@@ -160,7 +160,7 @@ void RTC_Handler(void)
 
 // **************************************************************************
 
-void Rtc::attachOverflowInterrupt(void (*callback)(void))
+void RtCounter::attachOverflowInterrupt(void (*callback)(void))
 {
   _OverflowCallback = callback;
   if (_enabled)
@@ -170,7 +170,7 @@ void Rtc::attachOverflowInterrupt(void (*callback)(void))
   }
 }
 
-void Rtc::Rtc::detachOverflowInterrupt()
+void RtCounter::RtCounter::detachOverflowInterrupt()
 {
   _OverflowCallback = NULL;
   if (_enabled)
@@ -182,7 +182,7 @@ void Rtc::Rtc::detachOverflowInterrupt()
 
 // **************************************************************************
 
-void Rtc::attachCompareMatchInterrupt(uint32_t deltaTicks, voidFuncPtr callback)
+void RtCounter::attachCompareMatchInterrupt(uint32_t deltaTicks, voidFuncPtr callback)
 {
   _CompareMatchCallback = callback;
   if (_enabled)
@@ -214,7 +214,7 @@ void Rtc::attachCompareMatchInterrupt(uint32_t deltaTicks, voidFuncPtr callback)
   }
 }
 
-void Rtc::detachCompareMatchInterrupt()
+void RtCounter::detachCompareMatchInterrupt()
 {
   _CompareMatchCallback = NULL;
   if (_enabled)
@@ -226,7 +226,7 @@ void Rtc::detachCompareMatchInterrupt()
 
 // **************************************************************************
 
-void Rtc::standbyModeTicks(uint32_t deltaTicks)
+void RtCounter::standbyModeTicks(uint32_t deltaTicks)
 {
   if (_enabled)
   {
@@ -269,14 +269,14 @@ void Rtc::standbyModeTicks(uint32_t deltaTicks)
 }
 
 
-void Rtc::standbyModeMs(uint32_t deltaMs)
+void RtCounter::standbyModeMs(uint32_t deltaMs)
 {
   uint32_t deltaTicks = msToTicks(deltaMs);
   standbyModeTicks(deltaTicks);
 }
 
 
-uint32_t Rtc::getTicks()
+uint32_t RtCounter::getTicks()
 {
   uint32_t ticks = 0;
 
@@ -297,12 +297,12 @@ uint32_t Rtc::getTicks()
 // Utility functions
 // **************************************************************************
 
-inline bool Rtc::isSyncing()
+inline bool RtCounter::isSyncing()
 {
   return (RTC->MODE0.STATUS.bit.SYNCBUSY);
 }
 
-inline void Rtc::sync()
+inline void RtCounter::sync()
 {
   while ((RTC->MODE0.STATUS.bit.SYNCBUSY) != 0)
     ;

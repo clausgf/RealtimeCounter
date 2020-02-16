@@ -1,5 +1,5 @@
 /**
- * Rtc library for Atmel/Microchip SAMD based Arduinos' RTC
+ * RtCounter library for Atmel/Microchip SAMD based Arduinos' RTC
  * peripherals.
  * This library uses the RTC peripheral in mode 0 as a 32 bit counter 
  * instead of clock/calendar mode 2 (Year-Month-Day-...) in the RTCZero
@@ -32,14 +32,14 @@
   SOFTWARE.
 */
 
-#ifndef Rtc_H
-#define Rtc_H
+#ifndef RtCounter_H
+#define RtCounter_H
 
 #include "Arduino.h"
 
 
 /**
- * This class uses the SAMD's RTC peripheral. In contrast to the RTCZero 
+ * This class uses the SAMD's RTC peripheral. In contrast to the RtcZero 
  * library which uses clock/calendar mode (mode 2) of the RTC, this class
  * employs RTC mode 0 which implements a free running 32 bit counter. This better
  * suits such embedded applications which measure (relative) time differences 
@@ -52,17 +52,17 @@
  * This class was tested on a SAMD21 controller with external 32.768 kHz
  * quartz (standard configuration on Adafruit Feather M0).
  */
-class Rtc
+class RtCounter
 {
 public:
 
   /// Constructor
-  Rtc();
+  RtCounter();
 
-  /// Enable the RTC class and peripheral
+  /// Enable the RtCounter class and the RTC peripheral
   bool begin();
 
-  /// Disable the RTC class and peripheral
+  /// Disable the RtCounter class and the RTC peripheral
   void end();
 
   /// Return whether the class has been initialized by calling begin().
@@ -151,6 +151,6 @@ private:
   void sync();
 };
 
-extern class Rtc Rtc;
+extern class RtCounter RtCounter;
 
-#endif // Rtc_H
+#endif // RtCounter_H

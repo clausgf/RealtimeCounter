@@ -8,17 +8,19 @@ This library uses the RTC peripheral in mode 0 as a 32 bit counter instead of cl
 
 Usage example:
 ```c++
+#include <RtCounter.h>
+
 // initialization, usually called once in setup()
-Rtc.begin();
+RtCounter.begin();
 
 // this code might appear somewhere else
 // (1) get the current time in ticks (1/32768 s)
-uint32_t startSleepTimeInTicks = Rtc.getTicks();
+uint32_t startSleepTimeInTicks = RtCounter.getTicks();
 // (2) sleep 1000 milliseconds
-Rtc.standbyModeMs(1000);
+RtCounter.standbyModeMs(1000);
 // (3) document how much sleep we got
 Serial.print("I slept ");
-Serial.print(Rtc.getTicks() - startSleepTimeInTicks);
+Serial.print(RtCounter.getTicks() - startSleepTimeInTicks);
 Serial.print(" ticks. One tick is 1/32768 seconds.");
 ```
 

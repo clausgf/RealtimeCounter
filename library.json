@@ -1,0 +1,13 @@
+{
+  "name": "RealtimeCounter",
+  "keywords": "RTC, Timer, Counter, Sleep, Standby, SAMD",
+  "description": "Arduino support for the RTC peripheral in 32 bit counter mode for SAMD",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/clausgf/RealtimeCounter"
+  },
+  "version": "1.0.0",
+  "frameworks": "arduino",
+  "platforms": "atmelsam"
+}
